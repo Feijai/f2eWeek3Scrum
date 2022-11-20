@@ -1,0 +1,97 @@
+// Require
+@import "../../node_modules/bootstrap/scss/functions";
+@import "../../node_modules/bootstrap/scss/mixins";
+
+//veriable
+@import "./_variables"; // 自定義的變數 scss 檔
+@import "./root.scss";
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin-bottom: 0 !important;
+}
+p {
+    margin-bottom: 0 !important;
+}
+
+@font-face {
+    font-family: "Cubic";
+    src: url("../assets/web/Cubic_11_1.013_R.woff") format("woff"),
+        /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */ url("../assets/ttf/Cubic_11_1.013_R.ttf") format("truetype"); /* Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */
+}
+
+html,
+body,
+#root {
+    font-family: "Cubic" !important;
+    height: 100%;
+}
+body {
+    // font-family: 'Cubic'!important;
+}
+
+button {
+    padding: 0;
+    background: none;
+    border: 0;
+}
+
+.midHiegh {
+    height: calc(100% - var(--header-height));
+}
+
+.pCenter {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.rambleText {
+    background: linear-gradient(
+        270.03deg,
+        #339943 0.02%,
+        #ffef5b 25.01%,
+        #ff392d 49.99%,
+        #9747ff 74.46%,
+        #5c94fc 99.97%
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.dCenter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.fdc {
+    display: flex;
+    flex-direction: column;
+}
+
+.pBottomEnd {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    // transform: translate(-50%, 50%);
+}
+
+.pageButton{
+    width: 203px;
+    height: 80px;
+    background-color:var(--purple);
+    border-radius: 1rem;
+    bottom:4rem;
+    left:50%;
+    transform:translate(-50%,0);
+}
+
+.disableButton{
+    background-color:var(--mid-gray);
+}
