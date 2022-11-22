@@ -25,6 +25,8 @@ export const ThirdCss = styled.div`
   }
   .pageButton {
     bottom: 28px;
+    font-size: 32px;
+    line-height: 100%;
   }
   h2 {
     font-weight: 400;

@@ -1,11 +1,15 @@
 import React from "react";
-import { CatCardCss1, CatCardCss2, CatCardCss3 } from "./style";
-import { Draggable, Droppable } from "react-beautiful-dnd";
-
-interface CarCardProps {
-  item: any;
-  index: any;
-}
+import { CatCardCss1, CatCardCss2, CatCardCss3, CatCardCss4 } from "./style";
+import {
+  Draggable,
+  Droppable,
+  DroppableProvided,
+  DroppableStateSnapshot,
+} from "react-beautiful-dnd";
+import { CarCardProps, CatCard3Props } from "./cardInterface";
+import mouth from "../../assets/mouth.png";
+import eye from "../../assets/eye.png";
+import symbolsDrag from "../../assets/symbols_drag.png";
 
 export const CatCard1: React.FC<CarCardProps> = ({ item, index }) => {
   return (
@@ -16,6 +20,7 @@ export const CatCard1: React.FC<CarCardProps> = ({ item, index }) => {
             ref={provided.innerRef}
             {...provided.draggableProps}
             {...provided.dragHandleProps}
+            isDrag={snapshot.isDragging}
           >
             <div className="contain h-100 w-100 dCenter">
               <p className="text text-center ">
@@ -47,6 +52,7 @@ export const CatCard2: React.FC<CarCardProps> = ({ item, index }) => {
             ref={provided.innerRef}
             {...provided.draggableProps}
             {...provided.dragHandleProps}
+            isDrag={snapshot.isDragging}
           >
             <div className="contain h-100 w-100 dCenter">
               <p className="text text-center ">
@@ -69,29 +75,74 @@ export const CatCard2: React.FC<CarCardProps> = ({ item, index }) => {
   );
 };
 
-export const CatCard3: React.FC<CarCardProps> = ({ item, index }) => {
-    console.log(item)
+export const CatCard3: React.FC<CatCard3Props> = ({
+  item,
+  title,
+  valueKey,
+}) => {
   return (
-    <Droppable droppableId="productBacklog">
-      {(provided, snapshot) => (
-        <CatCardCss3 ref={provided.innerRef} {...provided.droppableProps}>
-          <Draggable draggableId={item.id} index={index}>
-            {(provided, snapshot) => {
-              return (
-                <div
-                  className="contain h-100 w-100 dCenter"
-                  ref={provided.innerRef}
-                  {...provided.draggableProps}
-                  {...provided.dragHandleProps}
-                >
-                  <p className="text text-center ">{item.content}</p>
-                </div>
-              );
-            }}
-          </Draggable>
+    <Droppable droppableId={valueKey}>
+      {(provided: DroppableProvided, dropSnapshot: DroppableStateSnapshot) => (
+        <CatCardCss3
+          ref={provided.innerRef}
+          {...provided.droppableProps}
+          haveItem={item.length > 0}
+          style={{}}
+        >
+          {item.length ? (
+            item.map((ele, idx) => (
+              <Draggable draggableId={valueKey} index={idx} key={idx}>
+                {(provided, snapshot) => {
+                  return (
+                    <div
+                      className="contain dCenter "
+                      ref={provided.innerRef}
+                      {...provided.draggableProps}
+                      {...provided.dragHandleProps}
+                    >
+                      {item.length !== 0 && <CatCard4 text={ele.content} />}
+                    </div>
+                  );
+                }}
+              </Draggable>
+            ))
+          ) : (
+            <div className="contain h-100 w-100 dCenter">
+              {!dropSnapshot.isDraggingOver && (
+                <p className="text text-center ">{title}</p>
+              )}
+            </div>
+          )}
           {provided.placeholder}
         </CatCardCss3>
       )}
     </Droppable>
+  );
+};
+
+export const CatCard4: React.FC<any> = ({ text }) => {
+  return (
+    <CatCardCss4>
+      <img src={symbolsDrag} alt="" className="symbolsDrag" />
+      <p className="text text-white">
+        {text.split("<br/>")?.map((ele: string, idx: number) =>
+          idx === 0 ? (
+            <React.Fragment key={idx}>{ele}</React.Fragment>
+          ) : (
+            <React.Fragment key={idx}>
+              <br />
+              {ele}
+            </React.Fragment>
+          )
+        )}
+      </p>
+      <div className="catFace dCenter">
+        <div className="w-100 d-flex justify-content-between">
+          <img src={eye} alt="" className="eye" />
+          <img src={eye} alt="" className="eye" />
+        </div>
+        <img src={mouth} alt="" className="mouth" />
+      </div>
+    </CatCardCss4>
   );
 };

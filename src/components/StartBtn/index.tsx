@@ -18,9 +18,7 @@ const StartBtn: React.FC<StartBtnProps> = ({ to, text, disable }) => {
                 : <button className='text-white position-absolute pageButton disableButton'>
                     {text}
                 </button>
-
             }
-
         </Link>
     )
 }
