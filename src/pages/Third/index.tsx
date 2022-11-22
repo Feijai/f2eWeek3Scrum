@@ -17,35 +17,37 @@ const Third: React.FC = () => {
     if (!destination) {
       return;
     }
-    // // 拷貝新的items (來自state)
-    // let newItemObj = { ...itemObj };
-    // const a = source.droppableId as "candidate";
-    // // splice(start, deleteCount, item )
-    // // 從source剪下被拖曳的元素
-    // const [remove] = newItemObj[
-    //   source.droppableId as keyof typeof newItemObj
-    // ].items.splice(source.index, 1);
-    // // 在destination位置貼上被拖曳的元素
-    // newItemObj[destination.droppableId as keyof typeof newItemObj].items.splice(
-    //   destination.index,
-    //   0,
-    //   remove
-    // );
-    // set state新的 itemObj
-    // setItemObj(newItemObj);
-
-    // 確認productBacklog順序
-    // const checkProductBacklogOrder = () => {
-    //   const currentProductBacklogOrder = newItemObj.productBacklog.items.map(
-    //     (ele) => {
-    //       return ele.priority;
-    //     }
-    //   );
-    //   return currentProductBacklogOrder.join("") === answerAry.join("")
-    //     ? true
-    //     : false;
-    // };
-    // setIsOrderCorret(checkProductBacklogOrder);
+    if (source.droppableId !== destination.droppableId) {
+      const sourceColumn = itemObj[source.droppableId];
+      const destColumn = itemObj[destination.droppableId];
+      const sourceItems = [...sourceColumn.items];
+      const destItems = [...destColumn.items];
+      const [removed] = sourceItems.splice(source.index, 1);
+      destItems.splice(destination.index, 0, removed);
+      setItemObj({
+        ...itemObj,
+        [source.droppableId]: {
+          ...sourceColumn,
+          items: sourceItems,
+        },
+        [destination.droppableId]: {
+          ...destColumn,
+          items: destItems,
+        },
+      });
+    } else {
+      const column = itemObj[source.droppableId];
+      const copiedItems = [...column.items];
+      const [removed] = copiedItems.splice(source.index, 1);
+      copiedItems.splice(destination.index, 0, removed);
+      setItemObj({
+        ...itemObj,
+        [source.droppableId]: {
+          ...column,
+          items: copiedItems,
+        },
+      });
+    }
   };
 
   return (
@@ -63,9 +65,9 @@ const Third: React.FC = () => {
               >
                 {itemObj.candidate.items.map((item, index) => {
                   return parseInt(item.priority) % 2 !== 0 ? (
-                    <CatCard1 item={item} index={index} key={item.id} />
+                    <CatCard1 item={item} index={index} key={index} />
                   ) : (
-                    <CatCard2 item={item} index={index} key={item.id} />
+                    <CatCard2 item={item} index={index} key={index} />
                   );
                 })}
                 {provided.placeholder}
@@ -74,14 +76,14 @@ const Third: React.FC = () => {
           </Droppable>
 
           <MainCard className="mainCard2 fdc" width={"594px"} height={"604px"}>
-            <h2 className="Header text-center text-white">
+            {/* <h2 className="Header text-center text-white">
               產品代辦清單 Product Backlog
-            </h2>
-            {Object.keys(itemObj.productBacklog).map((item, index) => 
+            </h2> */}
+            {Object.keys(itemObj.productBacklog).map((item, index) =>
               <CatCard3
                 item={
                   itemObj.productBacklog[
-                    item as keyof typeof itemObj.productBacklog
+                  item as keyof typeof itemObj.productBacklog
                   ]
                 }
                 index={index}
