@@ -6,6 +6,10 @@ import Home from "./pages/Home";
 import Second from "./pages/Second";
 import Third from "./pages/Third";
 import Forth from "./pages/Forth";
+import Five from "./pages/Five";
+import Six from "./pages/Six";
+import Seven from "./pages/Seven";
+import Final from "./pages/Final";
 
 const App: React.FC<any> = (props) => {
   const { now } = props;
@@ -19,6 +23,10 @@ const App: React.FC<any> = (props) => {
         <Route path="/second" element={<Second />} />
         <Route path="/third" element={<Third />} />
         <Route path="/forth" element={<Forth />} />
+        <Route path="/five" element={<Five />} />
+        <Route path="/six" element={<Six />} />
+        <Route path="/seven" element={<Seven />} />
+        <Route path="/final" element={<Final />} />
       </Routes>
     </>
   );

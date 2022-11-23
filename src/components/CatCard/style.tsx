@@ -47,11 +47,11 @@ export const CatCardCss3 = styled.div<{ haveItem: boolean }>`
   height: 111px;
   display: flex;
   justify-content: end;
-  border: ${(state) => (state.haveItem ? "0px" : "3px dashed #ffcb2d")};
+  border: ${(state) => (state.haveItem ? "0px" : "3px dashed var(--yellow)")};
   border-radius: 60px;
-  .contain{
-    width:100%;
-    height:100%;
+  .contain {
+    width: 100%;
+    height: 100%;
   }
   .text {
     font-weight: 400;
@@ -66,9 +66,9 @@ export const CatCardCss4 = styled.div`
   height: 111px;
   background-color: var(--yellow);
   border-radius: 60px;
-  display:flex;
+  display: flex;
   justify-content: space-around;
-  align-items:center;
+  align-items: center;
   .catFace {
     flex-direction: column;
     width: 48.15px;
@@ -83,8 +83,60 @@ export const CatCardCss4 = styled.div`
     height: 7.01px;
     margin-top: 6.13px;
   }
-  .symbolsDrag{
-    width:48px;
-    height:48px;
+  .symbolsDrag {
+    width: 48px;
+    height: 48px;
+  }
+`;
+
+export const CatCardCss5 = styled.div<{ isDrag: boolean }>`
+  width: 100%;
+  max-width: 546px;
+  height: ${(state) => (state.isDrag ? "168px!important" : "111px")};
+
+  .contain {
+    background: ${(state) => (state.isDrag ? "none" : "var(--yellow);")};
+    background-image: url(${(state) =>
+      state.isDrag ? catYellowFoot : "none"});
+    background-repeat: no-repeat;
+    border-radius: 60px;
+    justify-content: ${(state) => (state.isDrag ? "left" : "space-around")};
+    padding-left: ${(state) => (state.isDrag ? "2rem" : "0")};
+    transform: ${(state) => (state.isDrag ? "rotate(-15deg)!important" : "")};
+  }
+
+  .ball {
+    background-color: var(--ball-background);
+    border-radius: 50px;
+    width: 48px;
+    height: 48px;
+    color: var(--dark);
+  }
+  .text {
+    color: var(--dark);
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 150%;
+    width: 280px;
+    margin-left: ${(state) => (state.isDrag ? "1rem" : "0")};
+    padding-bottom: ${(state) => (state.isDrag ? "2rem" : "0")};
+  }
+  .catFace {
+    flex-direction: column;
+    width: 48.15px;
+    height: 25.4px;
+  }
+  .eye {
+    width: 6.13px;
+    height: 12.26px;
+  }
+  .mouth {
+    width: 11.38px;
+    height: 7.01px;
+    margin-top: 6.13px;
+  }
+  .symbolsDrag {
+    width: 48px;
+    height: 48px;
   }
 `;

@@ -1,5 +1,11 @@
 import React from "react";
-import { CatCardCss1, CatCardCss2, CatCardCss3, CatCardCss4 } from "./style";
+import {
+  CatCardCss1,
+  CatCardCss2,
+  CatCardCss3,
+  CatCardCss4,
+  CatCardCss5,
+} from "./style";
 import {
   Draggable,
   Droppable,
@@ -144,5 +150,50 @@ export const CatCard4: React.FC<any> = ({ text }) => {
         <img src={mouth} alt="" className="mouth" />
       </div>
     </CatCardCss4>
+  );
+};
+
+export const CatCard5: React.FC<CarCardProps> = ({ item, index }) => {
+  return (
+    <Draggable draggableId={item.id} index={index}>
+      {(provided, snapshot) => {
+        return (
+          <CatCardCss5
+            ref={provided.innerRef}
+            {...provided.draggableProps}
+            {...provided.dragHandleProps}
+            isDrag={snapshot.isDragging}
+          >
+            <div className="contain h-100 w-100 dCenter">
+              <div className="ball dCenter">
+                <span>{item.priority}</span>
+              </div>
+
+              <p className="text text-center ">
+                {item.content.split("<br/>")?.map((ele: string, idx: number) =>
+                  idx === 0 ? (
+                    <React.Fragment key={idx}>{ele}</React.Fragment>
+                  ) : (
+                    <React.Fragment key={idx}>
+                      <br />
+                      {ele}
+                    </React.Fragment>
+                  )
+                )}
+              </p>
+              {!snapshot.isDragging && (
+                <div className="catFace dCenter">
+                  <div className="w-100 d-flex justify-content-between">
+                    <img src={eye} alt="" className="eye" />
+                    <img src={eye} alt="" className="eye" />
+                  </div>
+                  <img src={mouth} alt="" className="mouth" />
+                </div>
+              )}
+            </div>
+          </CatCardCss5>
+        );
+      }}
+    </Draggable>
   );
 };
