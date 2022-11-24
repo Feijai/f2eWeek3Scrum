@@ -10,6 +10,7 @@ import Five from "./pages/Five";
 import Six from "./pages/Six";
 import Seven from "./pages/Seven";
 import Final from "./pages/Final";
+import Eight from "./pages/Eight";
 
 const App: React.FC<any> = (props) => {
   const { now } = props;
@@ -27,6 +28,7 @@ const App: React.FC<any> = (props) => {
         <Route path="/six" element={<Six />} />
         <Route path="/seven" element={<Seven />} />
         <Route path="/final" element={<Final />} />
+        <Route path="/eight" element={<Eight />} />
       </Routes>
     </>
   );

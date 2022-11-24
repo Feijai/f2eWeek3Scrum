@@ -7,25 +7,14 @@ import StartBtn from "../../components/StartBtn";
 import { thirdData } from "./data";
 import { DragDropContext, Droppable, DropResult } from "react-beautiful-dnd";
 import { CatCard1, CatCard2, CatCard3 } from "../../components/CatCard";
+import { handleFullDrop } from "../../utils/process";
 
 const Third: React.FC = () => {
   const [itemObj, setItemObj] = useState(thirdData);
   const [disable, setDisable] = useState(false);
 
-  const handleFullDrop = () => {
-    let ans = 0;
-    Object.entries(itemObj).forEach(([key, value], idx) => {
-      if (idx !== 0) {
-        if (itemObj[key].items.length) {
-          ans += 1;
-        }
-      }
-    });
-    return ans === 4;
-  };
-
   useEffect(() => {
-    setDisable(handleFullDrop());
+    setDisable(handleFullDrop(itemObj,0));
   }, [itemObj]);
 
   const onDragEnd = (event: DropResult) => {
