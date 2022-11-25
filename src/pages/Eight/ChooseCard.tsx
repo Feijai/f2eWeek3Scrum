@@ -1,39 +1,44 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { ChooseCardCss } from "./style";
 import defaultChecked from "../../assets/defaultChecked.png";
 import hoverChecked from "../../assets/hoverChecked.png";
 import checkedPic from "../../assets/checked.png";
+import { QuesProps } from "../../utils/process";
 
 interface ChooseCardProps {
   text: string;
-  checkItem: string[];
+  ques: string;
+  itemNum: number;
+  checkItem: QuesProps;
   setCheckItem: Function;
 }
 
 const ChooseCard: React.FC<ChooseCardProps> = ({
   text,
+  ques,
+  itemNum,
   checkItem,
   setCheckItem,
 }) => {
   const [checkImg, setCheckImg] = useState(defaultChecked);
   const [checked, setChecked] = useState(false);
-  const handleClick = (item: string) => {
-    let arr = [...checkItem];
-    if (arr.length === 0) {
-      arr.push(item);
-    } else if (arr.length > 0) {
-      arr.indexOf(item) !== -1
-        ? arr.splice(arr.indexOf(item), 1)
-        : arr.push(item);
-    }
-    setCheckItem(arr);
+  const handleClick = () => {
+    const obj = JSON.parse(JSON.stringify(checkItem));
+    obj[ques] = obj[ques] === itemNum ? null : itemNum;
+    setCheckItem(obj);
     setChecked(!checked);
   };
 
-  console.log(checked);
+  useEffect(() => {
+    if (checkItem[ques] !== itemNum) {
+      setChecked(false);
+      setCheckImg(defaultChecked);
+    }
+  }, [checkItem]);
+
   return (
     <ChooseCardCss
-      className="dCenter"
+      className={`dCenter ${!checked ? "canHover" : "active"}`}
       onMouseOver={() => {
         if (!checked) setCheckImg(hoverChecked);
       }}
@@ -41,7 +46,7 @@ const ChooseCard: React.FC<ChooseCardProps> = ({
         if (!checked) setCheckImg(defaultChecked);
       }}
       onClick={() => {
-        handleClick(text);
+        handleClick();
       }}
       checked={checked}
     >

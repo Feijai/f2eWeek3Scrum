@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const EightCss = styled.div`
+export const EightCss = styled.div<{ done: boolean }>`
   padding-top: 160px;
   padding-bottom: 120px;
   .topChat {
@@ -26,6 +26,19 @@ export const EightCss = styled.div`
   }
   .pageButton {
     bottom: 40px;
+  }
+
+  .canHover {
+    &:hover {
+      border: 3px dashed var(--yellow);
+    }
+  }
+  .active {
+    background: rgba(255, 203, 45, 0.2);
+    border: 3px solid #ffcb2d;
+  }
+  .disableButton{
+    width:${state => state.done? "376px": "203px"};
   }
 `;
 

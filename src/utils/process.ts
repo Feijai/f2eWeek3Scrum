@@ -1,3 +1,9 @@
+export interface QuesProps {
+    q1: null | number;
+    q2: null | number;
+    [key: string]: null | number;
+}
+
 interface ItemObjProps {
     [x: string]: {
         title: string;
@@ -34,11 +40,17 @@ export const handleAnswer = (itemObj: ItemObjProps, num: number, answer: string[
     if (arr.length !== answer.length) return false
     let count = 0
     arr.forEach((ele, idx) => {
-        console.log('===ele===', ele)
-        console.log('===answer[idx]===', answer[idx])
-        count += ele === answer[idx] ? 1 : 0
+        count += ele === answer[idx] ? 1 : -1
     });
-    console.log(count)
-    return count === 4
+    return count === answer.length
 
+}
+
+export const arrCompare = (arr: QuesProps, answer: QuesProps) => {
+    let count = 0
+    Object.keys(arr).forEach((ele) => {
+        count += arr[ele] === answer[ele] ? 1 : 0
+    })
+
+    return count === Object.keys(arr).length
 }

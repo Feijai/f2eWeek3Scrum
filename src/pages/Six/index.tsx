@@ -9,10 +9,17 @@ import avatar_me from "../../assets/avatar_me.png";
 import chat_me from "../../assets/chat_me.png";
 import NextBtn from "../../components/NextBtn";
 import confluenceLogo from "../../assets/confluence-logo.png";
+import { PageProps } from "../../utils/interfaces";
+import { useNavigate } from "react-router-dom";
 
-export default function Six() {
+const Six: React.FC<PageProps> = ({ nextPage }) => {
+  const navigate = useNavigate();
   const handleClick = () => {
-    page === 1 ? setPage(2) : setPage(1);
+    if (page === 1) setPage(2);
+    if (page === 2) {
+      nextPage();
+      navigate("/seven");
+    }
   };
   const [page, setPage] = useState(1);
   return (
@@ -105,4 +112,6 @@ export default function Six() {
       </div>
     </SixCss>
   );
-}
+};
+
+export default Six;

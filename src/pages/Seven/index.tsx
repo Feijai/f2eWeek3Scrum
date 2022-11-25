@@ -10,13 +10,16 @@ import {
   DropResult,
 } from "react-beautiful-dnd";
 import StartBtn from "../../components/StartBtn";
-import { sevenData, sevenAnswer } from "./sevenData";
+import { sevenData, sevenAnswer, sevenAnswerData } from "./sevenData";
 import MeetingCard from "./MeetingCard";
 import { handleFullDrop, handleAnswer } from "../../utils/process";
+import { PageProps } from "../../utils/interfaces";
+import avatarChat from "../../assets/avatar_dev1_chat.png";
 
-export default function Seven() {
+const Seven: React.FC<PageProps> = ({ nextPage }) => {
   const [itemObj, setItemObj] = useState(sevenData);
   const [finish, setFinish] = useState(false);
+  const [chat, setChat] = useState(false);
   const [answer, setAnswer] = useState(false);
   const [page, setPage] = useState(1);
   const handleClick = () => {
@@ -25,7 +28,8 @@ export default function Seven() {
 
   const handleFinish = () => {
     if (!answer) {
-      setPage(3);
+      setItemObj(sevenAnswerData);
+      setChat(true);
     }
   };
   const onDragEnd = (event: DropResult) => {
@@ -72,7 +76,6 @@ export default function Seven() {
     setAnswer(handleAnswer(itemObj, 3, sevenAnswer));
   }, [itemObj, finish]);
 
-  console.log(answer);
   return (
     <SevenCss>
       <div className="dCenter">
@@ -102,42 +105,58 @@ export default function Seven() {
               height={"736px"}
               className="mainCard2 position-relative"
             >
-              <div className="todo">
-                {Object.entries(itemObj).map(([key, values], idx) => (
-                  <>
-                    {idx < 4 && (
-                      <Droppable droppableId={key} key={key}>
-                        {(provided, snapshot) => (
-                          <div
-                            ref={provided.innerRef}
-                            {...provided.droppableProps}
-                          >
-                            <>
-                              {itemObj[key].items.length > 0 ? (
-                                itemObj[key].items.map((item, index) => (
-                                  <MeetingCard
-                                    item={item}
-                                    index={index}
-                                    key={index}
-                                  />
-                                ))
-                              ) : (
-                                <div className="dropItem empty"></div>
-                              )}
-                              {provided.placeholder}
-                            </>
-                          </div>
-                        )}
-                      </Droppable>
-                    )}
-                  </>
-                ))}
-              </div>
+              {chat ? (
+                <div className="chat">
+                  <img src={avatar_dev1} alt="" className="avatar" />
+                  <img
+                    src={avatarChat}
+                    alt=""
+                    className="text"
+                    style={{ marginLeft: "1rem" }}
+                  />
+                </div>
+              ) : (
+                <div className="todo">
+                  {Object.entries(itemObj).map(([key, values], idx) => (
+                    <>
+                      {idx < 4 && (
+                        <Droppable droppableId={key} key={key}>
+                          {(provided, snapshot) => (
+                            <div
+                              ref={provided.innerRef}
+                              {...provided.droppableProps}
+                            >
+                              <>
+                                {itemObj[key].items.length > 0 ? (
+                                  itemObj[key].items.map((item, index) => (
+                                    <MeetingCard
+                                      item={item}
+                                      index={index}
+                                      key={index}
+                                    />
+                                  ))
+                                ) : (
+                                  <div className="dropItem empty"></div>
+                                )}
+                                {provided.placeholder}
+                              </>
+                            </div>
+                          )}
+                        </Droppable>
+                      )}
+                    </>
+                  ))}
+                </div>
+              )}
               <div className="toDrop position-relative">
                 {Object.entries(itemObj).map(([key, values], idx) => (
                   <>
                     {idx > 3 && (
-                      <Droppable droppableId={key} key={key}>
+                      <Droppable
+                        droppableId={key}
+                        key={key}
+                        isDropDisabled={itemObj[key].items.length > 0}
+                      >
                         {(provided, snapshot) => (
                           <div
                             ref={provided.innerRef}
@@ -183,10 +202,10 @@ export default function Seven() {
                 ))}
               </div>
               <StartBtn
-                to={""}
+                to={answer ? "/eight" : ""}
                 text={"完成挑戰"}
                 disable={finish}
-                handleClick={handleFinish}
+                handleClick={answer ? [nextPage] : [handleFinish]}
               />
             </MainCard>
           </DragDropContext>
@@ -194,4 +213,6 @@ export default function Seven() {
       </div>
     </SevenCss>
   );
-}
+};
+
+export default Seven;

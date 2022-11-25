@@ -1,1 +1,3 @@
-export {}
+export const P_BAR_NEXT_ACTION = 'P_BAR_NEXT_ACTION'
+export const P_BAR_BACK_ACTION = 'P_BAR_BACK_ACTION'
+export const P_BAR_TO_START_ACTION = 'P_BAR_TO_START_ACTION'

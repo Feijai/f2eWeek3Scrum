@@ -13,14 +13,16 @@ import lineBlue1 from "../../assets/lineBlue1.png";
 import lineBlue2 from "../../assets/lineBlue2.png";
 import { textData } from "./textData";
 import textBr from "../../components/TextBr";
+import { useNavigate } from "react-router-dom";
+import { PageProps } from "../../utils/interfaces";
 
-export default function Forth() {
+const Forth: React.FC<PageProps> = ({ nextPage }) => {
   const [page, setPage] = useState(1);
   const [color, setColor] = useState("--yellow");
   const handleClick = () => {
     page < 6 ? setPage(page + 1) : setPage(1);
   };
-
+  const navigate = useNavigate();
   useEffect(() => {
     if (page === 1 || page === 4) setColor("--yellow");
     if (page === 2 || page === 3) setColor("--purple");
@@ -48,7 +50,17 @@ export default function Forth() {
         <MainCard width={"100%"} height={"537px"}>
           <div className="chat">
             <p className="text">{text(page)}</p>
-            <NextBtn handleClick={handleClick} color={color} />
+            <NextBtn
+              handleClick={() => {
+                if (page < 6) {
+                  handleClick();
+                } else {
+                  nextPage();
+                  navigate("/five");
+                }
+              }}
+              color={color}
+            />
           </div>
         </MainCard>
       </div>
@@ -154,4 +166,6 @@ export default function Forth() {
       </div>
     </ForthCss>
   );
-}
+};
+
+export default Forth;

@@ -5,7 +5,7 @@ interface StartBtnProps {
   to: string;
   text: string;
   disable: boolean;
-  handleClick?: () => void;
+  handleClick?: any;
 }
 
 const StartBtn: React.FC<StartBtnProps> = ({
@@ -20,7 +20,9 @@ const StartBtn: React.FC<StartBtnProps> = ({
         <button
           className="text-black position-absolute pageButton"
           onClick={() => {
-            if (handleClick) handleClick();
+            if (handleClick) {
+              handleClick.forEach((ele: any) => ele());
+            }
           }}
         >
           {text}

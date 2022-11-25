@@ -8,13 +8,14 @@ import { thirdData } from "./data";
 import { DragDropContext, Droppable, DropResult } from "react-beautiful-dnd";
 import { CatCard1, CatCard2, CatCard3 } from "../../components/CatCard";
 import { handleFullDrop } from "../../utils/process";
+import { PageProps } from "../../utils/interfaces";
 
-const Third: React.FC = () => {
+const Third: React.FC<PageProps> = ({ nextPage }) => {
   const [itemObj, setItemObj] = useState(thirdData);
   const [disable, setDisable] = useState(false);
 
   useEffect(() => {
-    setDisable(handleFullDrop(itemObj,0));
+    setDisable(handleFullDrop(itemObj, 0));
   }, [itemObj]);
 
   const onDragEnd = (event: DropResult) => {
@@ -105,7 +106,7 @@ const Third: React.FC = () => {
           </MainCard>
         </DragDropContext>
       </div>
-      <StartBtn to={""} text={"完成清單"} disable={disable} />
+      <StartBtn to={disable ?"/forth" :''} text={"完成清單"} disable={disable} handleClick={[nextPage]}/>
       <img src={chat} alt="" className="chat position-absolute" />
       <img src={poSit} alt="" className="poSit position-absolute" />
     </ThirdCss>

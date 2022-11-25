@@ -1,7 +1,9 @@
 import React from "react";
 import { FinalCss } from "./style";
 import StartBtn from "../../components/StartBtn";
-export default function Final() {
+import { PageProps } from "../../utils/interfaces";
+
+const Final: React.FC<PageProps> = ({ nextPage }) => {
   return (
     <FinalCss className="position-relative">
       <div className="family position-relative">
@@ -11,7 +13,14 @@ export default function Final() {
           歡迎加入開發騎士團！
         </p>
       </div>
-      <StartBtn to={""} text={"重新開始"} disable={true} />
+      <StartBtn
+        to={"/"}
+        text={"重新開始"}
+        disable={true}
+        handleClick={[nextPage]}
+      />
     </FinalCss>
   );
-}
+};
+
+export default Final;

@@ -87,13 +87,12 @@ export const CatCard3: React.FC<CatCard3Props> = ({
   valueKey,
 }) => {
   return (
-    <Droppable droppableId={valueKey}>
+    <Droppable droppableId={valueKey} isDropDisabled={item.length>0}>
       {(provided: DroppableProvided, dropSnapshot: DroppableStateSnapshot) => (
         <CatCardCss3
           ref={provided.innerRef}
           {...provided.droppableProps}
           haveItem={item.length > 0}
-          style={{}}
         >
           {item.length ? (
             item.map((ele, idx) => (
@@ -155,7 +154,7 @@ export const CatCard4: React.FC<any> = ({ text }) => {
 
 export const CatCard5: React.FC<CarCardProps> = ({ item, index }) => {
   return (
-    <Draggable draggableId={item.id} index={index}>
+    <Draggable draggableId={item.id} index={index} key={item.id}>
       {(provided, snapshot) => {
         return (
           <CatCardCss5

@@ -10,8 +10,9 @@ import {
 import { MainCard } from "../../components/MainCard";
 import { fiveData } from "./fiveData";
 import StartBtn from "../../components/StartBtn";
+import { PageProps } from "../../utils/interfaces";
 
-export default function Five() {
+const Five: React.FC<PageProps> = ({ nextPage }) => {
   const [itemObj, setItemObj] = useState(fiveData);
   const [disable, setDisable] = useState(false);
   const [productTotal, setProductTotal] = useState(0);
@@ -36,8 +37,7 @@ export default function Five() {
 
     setProductTotal(product);
     setRunTotal(run);
-    run>20? setDisable(false) : setDisable(true)
-
+    run > 20 ? setDisable(false) : setDisable(true);
   }, [itemObj]);
 
   const onDragEnd = (event: DropResult) => {
@@ -78,9 +78,8 @@ export default function Five() {
         },
       });
     }
-    // setDisable(handleFullDrop());
   };
-
+  
   return (
     <FiveCss className="position-relative">
       <p className="headText text-center">
@@ -138,10 +137,13 @@ export default function Five() {
         </DragDropContext>
       </div>
       <StartBtn
-        to={""}
+        to={"/six"}
         text={disable ? "完成清單" : "超過20點！請再調整清單"}
         disable={disable}
+        handleClick={[nextPage]}
       />
     </FiveCss>
   );
-}
+};
+
+export default Five;
