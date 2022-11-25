@@ -54,3 +54,35 @@ export const arrCompare = (arr: QuesProps, answer: QuesProps) => {
 
     return count === Object.keys(arr).length
 }
+
+export const getBarPercent = (str: string) => {
+    switch (str) {
+        case "/second": {
+            return 20
+        }
+        case '/third': {
+            return 30
+        }
+        case '/forth': {
+            return 40
+        }
+        case '/five': {
+            return 50
+        }
+        case '/six': {
+            return 60
+        }
+        case '/seven': {
+            return 80
+        }
+        case '/eight': {
+            return 90
+        }
+        case '/final': {
+            return 100
+        }
+        default: {
+            return 10
+        }
+    }
+}

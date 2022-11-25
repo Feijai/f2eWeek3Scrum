@@ -6,7 +6,9 @@ import {
   clickNextAction,
   clickBackAction,
   clickToStartAction,
+  setPBarPercentAction,
 } from "./redux/actions/PBarActions";
+import { getBarPercent } from "./utils/process";
 import Home from "./pages/Home";
 import Second from "./pages/Second";
 import Third from "./pages/Third";
@@ -18,9 +20,9 @@ import Final from "./pages/Final";
 import Eight from "./pages/Eight";
 
 const App: React.FC<any> = (props) => {
-  const { now, nextPage, backPage, startPage } = props;
+  const { now, nextPage, backPage, startPage, setBar } = props;
   const location = useLocation();
-
+  setBar(getBarPercent(location.pathname));
   return (
     <>
       <Header now={now} backPage={backPage} />
@@ -47,4 +49,5 @@ export default connect(mapStateToProps, {
   nextPage: clickNextAction,
   backPage: clickBackAction,
   startPage: clickToStartAction,
+  setBar: setPBarPercentAction,
 })(App);
