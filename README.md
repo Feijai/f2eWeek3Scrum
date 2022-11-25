@@ -2,8 +2,10 @@
 
 使用設計稿 : [https://www.figma.com/file/oW1YDvKU916KBx8iyz891p/F2E-Week3-by-%E8%AE%80%E6%9B%B8%E7%8B%97%E7%8B%97?node-id=48%3A1944&t=8bzFdS7g3V92kz3C-0](https://www.figma.com/file/oW1YDvKU916KBx8iyz891p/F2E-Week3-by-%E8%AE%80%E6%9B%B8%E7%8B%97%E7%8B%97?node-id=48%3A1944&t=8bzFdS7g3V92kz3C-0)
 
-參考資料 : [https://github.com/atlassian/react-beautiful-dnd/blob/master/docs/api/draggable.md#children-function-render-props--function-as-child](https://github.com/atlassian/react-beautiful-dnd/blob/master/docs/api/draggable.md#children-function-render-props--function-as-child)
-[https://github.com/atlassian/react-beautiful-dnd/blob/master/docs/api/droppable.md#children-function](https://github.com/atlassian/react-beautiful-dnd/blob/master/docs/api/droppable.md#children-function)
+參考資料 :
+
+- [https://github.com/atlassian/react-beautiful-dnd/blob/master/docs/api/draggable.md#children-function-render-props--function-as-child](https://github.com/atlassian/react-beautiful-dnd/blob/master/docs/api/draggable.md#children-function-render-props--function-as-child)
+- [https://github.com/atlassian/react-beautiful-dnd/blob/master/docs/api/droppable.md#children-function](https://github.com/atlassian/react-beautiful-dnd/blob/master/docs/api/droppable.md#children-function)
 
 ## 系統說明
 
