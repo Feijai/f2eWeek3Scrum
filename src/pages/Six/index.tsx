@@ -15,7 +15,9 @@ import { useNavigate } from "react-router-dom";
 const Six: React.FC<PageProps> = ({ nextPage }) => {
   const navigate = useNavigate();
   const handleClick = () => {
-    if (page === 1) setPage(2);
+    if (page === 1) {
+      nextPage();
+      setPage(2)}
     if (page === 2) {
       nextPage();
       navigate("/seven");
